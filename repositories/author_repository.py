@@ -24,3 +24,13 @@ def select(id):
     if result is not None:
         author = Author(results['first_name'], results['last_name'], results['id'])
     return author
+
+def select_all():
+    authors = []
+    sql = """SELECT * FROM authors ORDER BY id"""
+    results = run_sql(sql)
+
+    for row in results:
+        author = Author(row['first_name'], row['last_name'], row['id'])
+        authors.append(author)
+    return authors
