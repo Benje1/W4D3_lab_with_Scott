@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="/books/{{book.id}}" method="post">
+    <label for="title">
+        Enter book details 
+    </label>
+    <input type="text" id="title" name="title" placeholder="Enter book title" value="{{book.title}}" autofocus>
+    <label for="first_name">
+        Enter author first name
+    </label>
+    <input type="text" id="first_name" name="first_name" placeholder="Enter book first_name" value="{{book.author.first_name}}" autofocus>
+    <label for="last_name">
+        Enter author last name 
+    </label>
+    <input type="text" id="last_name" name="last_name" placeholder="Enter book last_name" value="{{book.author.last_name}}" autofocus>
+    <button type="submit">Update book</button>
+</form>
+{% endblock %}

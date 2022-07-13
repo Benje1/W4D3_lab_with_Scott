@@ -43,5 +43,28 @@ def show(id):
     book = book_repository.select(id)
     return render_template("/books/show.html", book=book)
 
+@books_blueprint.route("/books/<id>/edit")
+def edit(id):
+    book = book_repository.select(id)
+    return render_template("/books/edit.html", book=book)
+
+@books_blueprint.route("/books/<id>", methods=["POST"])
+def update(id):
+    title = request.form['title']
+    first = request.form['first_name']
+    last = request.form['last_name']
+    authors = author_repository.select_all()
+    author_result = Author(first, last)
+    for author in authors:
+        if author.first_name == first and author.last_name == last:
+            author_result = author
+            break
+    if not author_result.id:
+        author_repository.save(author_result)
+    book = Book(title, author_result, id)
+
+    # breakpoint()
+    book_repository.update(book)
+    return redirect(f"/books/{id}")
 
 
