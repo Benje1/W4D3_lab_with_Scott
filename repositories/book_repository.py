@@ -12,3 +12,7 @@ def save(book):
     id = results[0]['id']
     book.id = id
     return book
+
+def delete_all():
+    sql = """DELETE FROM books"""
+    run_sql(sql)
