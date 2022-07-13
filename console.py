@@ -7,6 +7,7 @@ import repositories.author_repository as author_repository
 
 author1 = Author("Ian", "Rankin")
 book1 = Book("Exit Music", author1)
-
+author_repository.save(author1)
+book_repository.save(book1)
 
 pdb.set_trace()
