@@ -16,3 +16,19 @@ def save(book):
 def delete_all():
     sql = """DELETE FROM books"""
     run_sql(sql)
+
+def select_all():
+    books = []
+    sql = """SELECT * FROM books ORDER BY id"""
+    results = run_sql(sql)
+
+    for row in results:
+        author = author_repository.select(row["author_id"])
+        book = Book(row['title'], author, row['id'])
+        books.append(book)
+    return books
+
+def delete(id):
+    sql = """DELETE FROM books WHERE id = %s"""
+    values = [id]
+    run_sql(sql, values)
